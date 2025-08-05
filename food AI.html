@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Complete Menu - A Culinary Journey</title>
+  
+  <!-- Google Fonts for an elegant, premium look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables for a luxurious Dark & Gold theme */
+    :root {
+      --background-color: #121212;
+      --card-background: #1E1E1E;
+      --accent-gold: #D4AF37;
+      --text-light: #EAEAEA;
+      --text-secondary: #A0A0A0;
+      --border-color: rgba(212, 175, 55, 0.2);
+      --border-radius: 12px; /* Slightly smaller radius for smaller cards */
+      --transition-speed: 0.4s;
+    }
+
+    /* General Body Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-light);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Main Container */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+
+    /* Header Styling */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 50px;
+    }
+    .header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 4vw, 2.8rem); /* Smaller font size */
+        color: var(--accent-gold);
+    }
+    .header .back-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        border: 1px solid var(--text-secondary);
+        padding: 8px 18px; /* Smaller padding */
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+    .header .back-link:hover {
+        color: var(--primary-dark);
+        background-color: var(--accent-gold);
+        border-color: var(--accent-gold);
+    }
+
+    /* Category Title Styling */
+    .category-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem; /* Smaller font size */
+        color: var(--accent-gold);
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .category-section {
+        margin-bottom: 60px;
+    }
+
+    /* Menu Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax for smaller cards */
+      gap: 25px; /* Tighter gap */
+    }
+
+    /* Menu Item Card Styling */
+    .photo-box {
+      background: var(--card-background);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .photo-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+
+    /* Image container */
+    .image-container {
+      width: 100%;
+      height: 200px; /* Reduced height for a more compact card */
+      overflow: hidden;
+    }
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-speed) ease;
+    }
+    .photo-box:hover img {
+      transform: scale(1.05);
+    }
+
+    .description {
+      padding: 20px; /* Reduced padding */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .description h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; /* Smaller font size */
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+    .description .price {
+      font-size: 1.5rem; /* Smaller font size */
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .description p {
+      font-size: 0.9rem; /* Smaller font size */
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .book-now {
+      background: var(--accent-gold);
+      color: var(--background-color);
+      padding: 12px 24px; /* Smaller padding */
+      font-size: 0.9rem; /* Smaller font size */
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
+      margin-top: auto;
+    }
+    .book-now:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+        }
+        .header {
+            flex-direction: column;
+            gap: 20px;
+        }
+        .gallery {
+            grid-template-columns: 1fr; /* Single column on mobile */
+        }
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Our Exquisite Menu</h1>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </header>
+
+        <main>
+            <!-- Thalis Section -->
+            <section class="category-section">
+                <h2 class="category-title">Thalis</h2>
+                <div class="gallery">
+                    <div class="photo-box"><div class="image-container"><img src="rajasthani thali.png" alt="Rajasthani thali"></div><div class="description"><h3>Rajasthani Thali</h3><h4 class="price">₹ 419</h4><p>Dal, Bati, and Salad. Subject to availability.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="punjabi thali.png" alt="Punjabi Thali"></div><div class="description"><h3>Punjabi Thali</h3><h4 class="price">₹ 530</h4><p>Matar Paneer, Aloo Chole, Jeera Rice, Raita, Roti, and more.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="shai thali.png" alt="Shahi Thali"></div><div class="description"><h3>Shahi Thali</h3><h4 class="price">₹ 780</h4><p>Masala chole, dal makhani, kadhai paneer, jeera chawal, and more.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="mini thali.png" alt="Mini Thali"></div><div class="description"><h3>Mini Thali</h3><h4 class="price">₹ 289</h4><p>Dal Fry, Plain Chawal, 4 Ghee Roti, Achar, Salad, and Papad.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="jain thali.png" alt="Jain Thali"></div><div class="description"><h3>Jain Thali</h3><h4 class="price">₹ 320</h4><p>Matar Paneer, Dal Fry, 4 Ghee Roti, Chawal, Raita, and Sweet.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="mini rajsthan thali.png" alt="Mini Rajasthani Thali"></div><div class="description"><h3>Mini Rajasthani Thali</h3><h4 class="price">₹ 320</h4><p>Dal, Bati, and Salad. Subject to availability.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                </div>
+            </section>
+
+            <!-- Main Courses Section -->
+            <section class="category-section">
+                <h2 class="category-title">Main Courses</h2>
+                <div class="gallery">
+                    <div class="photo-box"><div class="image-container"><img src="besan gatte ki sabji.png" alt="Besan Gatte"></div><div class="description"><h3>Besan Gatte</h3><h4 class="price">₹ 185</h4><p>Gram flour dumplings in a tangy yogurt curry (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="dal fry.png" alt="Daal Fry"></div><div class="description"><h3>Daal Fry</h3><h4 class="price">₹ 220</h4><p>Yellow lentils tempered with spices (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="lehsunni daal.png" alt="Lehsunni Daal"></div><div class="description"><h3>Lehsunni Daal</h3><h4 class="price">₹ 178</h4><p>Flavorful lentils with a strong hint of garlic (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="daal tadka.png" alt="Daal Tadka"></div><div class="description"><h3>Daal Tadka</h3><h4 class="price">₹ 249</h4><p>Yellow dal with a sizzling tempering of spices and ghee (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="toor daal sabji.png" alt="Toor Daal"></div><div class="description"><h3>Toor Daal</h3><h4 class="price">₹ 171</h4><p>Simple and wholesome split pigeon pea curry (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="daal makhani.png" alt="Daal Makhani"></div><div class="description"><h3>Daal Makhani</h3><h4 class="price">₹ 239</h4><p>Classic black lentils slow-cooked to creamy perfection (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="paneer bhurji.png" alt="Paneer Bhurji"></div><div class="description"><h3>Paneer Bhurji</h3><h4 class="price">₹ 191</h4><p>Scrambled Indian cottage cheese with onions and tomatoes (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="paneer butter masala.png" alt="Paneer Butter Masala"></div><div class="description"><h3>Paneer Butter Masala</h3><h4 class="price">₹ 289</h4><p>Creamy tomato curry with soft paneer cubes (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="kadai paneer.png" alt="Kadai Paneer"></div><div class="description"><h3>Kadai Paneer</h3><h4 class="price">₹ 319</h4><p>Spicy curry with paneer and bell peppers (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="matar paneer.png" alt="Matar Paneer"></div><div class="description"><h3>Matar Paneer</h3><h4 class="price">₹ 239</h4><p>Paneer and green peas in a savory tomato-based sauce (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="aloo chole.png" alt="Aloo Chole"></div><div class="description"><h3>Aloo Chole</h3><h4 class="price">₹ 242</h4><p>A hearty curry of potatoes and chickpeas (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="masale chole.png" alt="Masale Chole"></div><div class="description"><h3>Masale Chole</h3><h4 class="price">₹ 280</h4><p>Spicy and tangy chickpea curry (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="rajama chole.png" alt="Rajma Masala"></div><div class="description"><h3>Rajma Masala</h3><h4 class="price">₹ 149</h4><p>Red kidney beans in a thick, flavorful gravy (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="kali dal rajma.png" alt="Kali Dal Rajma"></div><div class="description"><h3>Kali Dal Rajma</h3><h4 class="price">₹ 200</h4><p>A mix of black lentils and red kidney beans (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="aloo matar.png" alt="Aloo Matar"></div><div class="description"><h3>Aloo Matar</h3><h4 class="price">₹ 189</h4><p>A simple curry of potatoes and green peas (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="aloo tamatar.png" alt="Aloo Tamatar"></div><div class="description"><h3>Aloo Tamatar</h3><h4 class="price">₹ 179</h4><p>Potatoes in a tangy tomato gravy (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="aloo pudina.png" alt="Aloo Pudina"></div><div class="description"><h3>Aloo Pudina</h3><h4 class="price">₹ 210</h4><p>Potatoes cooked with a fresh mint-based sauce (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="sev tamatar.png" alt="Sev Tamatar"></div><div class="description"><h3>Sev Tamatar</h3><h4 class="price">₹ 219</h4><p>Spicy tomato curry topped with crispy gram flour noodles (sev) (250-300g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                </div>
+            </section>
+
+            <!-- Breads & Rice Section -->
+            <section class="category-section">
+                <h2 class="category-title">Breads & Rice</h2>
+                <div class="gallery">
+                    <div class="photo-box"><div class="image-container"><img src="Aloo paratha.png" alt="Aloo Paratha"></div><div class="description"><h3>Aloo Paratha</h3><h4 class="price">₹ 90</h4><p>Flaky flatbread stuffed with spiced potatoes (1 pc).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Paneer Paratha.png" alt="Paneer Paratha"></div><div class="description"><h3>Paneer Paratha</h3><h4 class="price">₹ 159</h4><p>Flatbread stuffed with spiced cottage cheese (1 pc).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Plain paratha.png" alt="Plain Paratha"></div><div class="description"><h3>Plain Paratha</h3><h4 class="price">₹ 80</h4><p>Layered and pan-fried whole wheat flatbread (1 pc).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Plain roti.png" alt="Plain Roti"></div><div class="description"><h3>Plain Roti</h3><h4 class="price">₹ 20</h4><p>Simple whole wheat flatbread (1 pc).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="butter roti.png" alt="Butter Roti"></div><div class="description"><h3>Butter Roti</h3><h4 class="price">₹ 42</h4><p>Whole wheat flatbread topped with butter (1 pc).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Ghee roti.png" alt="Ghee Roti"></div><div class="description"><h3>Ghee Roti</h3><h4 class="price">₹ 45</h4><p>Whole wheat flatbread roasted with clarified butter (1 pc).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="plain rice.png" alt="Plain Rice"></div><div class="description"><h3>Plain Rice</h3><h4 class="price">₹ 149</h4><p>Steamed basmati rice (150-200g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="jeera rice.png" alt="Jeera Rice"></div><div class="description"><h3>Jeera Rice</h3><h4 class="price">₹ 220</h4><p>Basmati rice tempered with cumin seeds (150-200g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                </div>
+            </section>
+
+            <!-- Snacks & Sides Section -->
+            <section class="category-section">
+                <h2 class="category-title">Snacks & Sides</h2>
+                <div class="gallery">
+                    <div class="photo-box"><div class="image-container"><img src="Plain Maggie.png" alt="Plain Maggie"></div><div class="description"><h3>Plain Maggie</h3><h4 class="price">₹ 45</h4><p>Classic instant noodles cooked to perfection (400ml).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Veg maggie.png" alt="Veg Maggie"></div><div class="description"><h3>Veg Maggie</h3><h4 class="price">₹ 45</h4><p>Noodles cooked with a mix of fresh vegetables (70g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Cheese maggi.png" alt="Cheese Maggie"></div><div class="description"><h3>Cheese Maggie</h3><h4 class="price">₹ 45</h4><p>Instant noodles loaded with delicious melted cheese (70g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Paneer mini maggi.png" alt="Paneer Mini Maggi"></div><div class="description"><h3>Paneer Mini Maggi</h3><h4 class="price">₹ 45</h4><p>Noodles cooked with small chunks of paneer (70g).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Mini margherita.png" alt="Mini Margherita"></div><div class="description"><h3>Mini Margherita</h3><h4 class="price">₹ 45</h4><p>A personal-sized classic Margherita pizza.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="masala chaas.png" alt="Masala Chaas"></div><div class="description"><h3>Masala Chaas</h3><h4 class="price">₹ 89</h4><p>Cooling and refreshing spiced buttermilk (300ml).</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="lehsuni chatni.png" alt="Lehsuni Chatni"></div><div class="description"><h3>Lehsuni Chatni</h3><h4 class="price">₹ 69</h4><p>Spicy and pungent garlic chutney.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                </div>
+            </section>
+            
+            <!-- Desserts & Drinks Section -->
+            <section class="category-section">
+                <h2 class="category-title">Desserts & Drinks</h2>
+                <div class="gallery">
+                    <div class="photo-box"><div class="image-container"><img src="Vanilla Pastry.png" alt="Vanilla Pastry"></div><div class="description"><h3>Vanilla Pastry</h3><h4 class="price">₹ 45</h4><p>A light and fluffy slice of vanilla pastry (1 pc).</p><a href="whatshapp FOOD.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Black forest pastry.png" alt="Black Forest Pastry"></div><div class="description"><h3>Black Forest Pastry</h3><h4 class="price">₹ 45</h4><p>Layers of chocolate cake, whipped cream, and cherries (1 pc).</p><a href="whatshapp FOOD.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Pineapple Pastry.png" alt="Pineapple Pastry"></div><div class="description"><h3>Pineapple Pastry</h3><h4 class="price">₹ 45</h4><p>Sweet and tangy pineapple-flavored pastry (1 pc).</p><a href="whatshapp FOOD.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Red velvet pastry.png" alt="Red Velvet Pastry"></div><div class="description"><h3>Red Velvet Pastry</h3><h4 class="price">₹ 45</h4><p>Moist red velvet cake with cream cheese frosting (1 pc).</p><a href="whatshapp FOOD.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="Chocolate Pastry.png" alt="Chocolate Pastry"></div><div class="description"><h3>Chocolate Pastry</h3><h4 class="price">₹ 45</h4><p>Rich, decadent, and fudgy chocolate pastry (1 pc).</p><a href="whatshapp FOOD.html" class="book-now">Book Now</a></div></div>
+                    <div class="photo-box"><div class="image-container"><img src="masala gtea.png" alt="Masala Tea"></div><div class="description"><h3>Masala Tea</h3><h4 class="price">₹ 45</h4><p>Aromatic Indian tea brewed with spices.</p><a href="whatshapp 2.html" class="book-now">Book Now</a></div></div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

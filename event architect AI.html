@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Architecture - Malik Brothers</title>
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Bootstrap CSS (for Grid System) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- AOS (Animate on Scroll) CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <!-- Main Stylesheet -->
+    <style>
+        :root {
+            --dark-bg: #1a1a1a; --dark-card: #222222; --gold-primary: #D4AF37;
+            --text-light: #f5f5f5; --text-secondary: #a0a0a0; --heading-font: 'Playfair Display', serif;
+            --body-font: 'Montserrat', sans-serif; --section-padding: 100px 0;
+        }
+
+        /* --- GLOBAL & THEME STYLES --- */
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body-font); background-color: var(--dark-bg); color: var(--text-secondary); line-height: 1.8; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: var(--heading-font); color: var(--text-light); font-weight: 700; }
+        a { color: var(--gold-primary); transition: all 0.3s ease; }
+        a:hover, a:focus { color: var(--text-light); text-decoration: none; outline: none; }
+        .site-btn { display: inline-block; padding: 12px 35px; border: 2px solid var(--gold-primary); background: transparent; color: var(--gold-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; border-radius: 5px; transition: all 0.4s ease; }
+        .site-btn:hover { background: var(--gold-primary); color: #000; }
+        .section-heading { margin-bottom: 60px; text-align: center; }
+        .section-heading .sub-title { color: var(--gold-primary); font-family: var(--heading-font); font-style: italic; font-size: 1.2rem; display: block; margin-bottom: 10px; }
+        .section-heading h2 { font-size: 3.5rem; color: var(--text-light); position: relative; display: inline-block; padding-bottom: 15px; }
+        .section-heading h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 3px; background-color: var(--gold-primary); }
+
+        /* --- PRELOADER (for smooth loading) --- */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: #1a1a1a; display: flex; justify-content: center; align-items: center; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #333; border-top: 5px solid var(--gold-primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 120px 0; text-align: center; position: relative;
+            background: linear-gradient(rgba(26,26,26,0.8), rgba(26,26,26,0.8)), url('https://images.pexels.com/photos/1537635/pexels-photo-1537635.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+        }
+
+        /* --- ELEGANT BACK BUTTON --- */
+        .back-link {
+            position: absolute; top: 30px; left: 30px; z-index: 10;
+            width: 50px; height: 50px; line-height: 50px; text-align: center;
+            background: rgba(0,0,0,0.3); border: 1px solid var(--gold-primary);
+            border-radius: 50%; color: var(--gold-primary) !important; font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover { background: var(--gold-primary); color: #000 !important; }
+
+        /* --- SERVICE CARDS (same style as main page for consistency) --- */
+        .service-card-photo {
+            background-color: var(--dark-card); border-radius: 8px; overflow: hidden;
+            border: 1px solid #2a2a2a; transition: all 0.4s ease; margin-bottom: 30px;
+        }
+        .service-card-photo:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .card-image { height: 350px; overflow: hidden; } /* Taller image for service pages */
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .service-card-photo:hover .card-image img { transform: scale(1.1); }
+        .card-content { padding: 30px; text-align: center; }
+        .card-content h3 { font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; }
+        .card-content p { min-height: 80px; } 
+
+        /* --- FOOTER --- */
+        #footer { background: #000; padding: 80px 0 0; }
+        #footer h4 { color: var(--gold-primary); margin-bottom: 25px; }
+        #footer .footer-links li a { color: var(--text-secondary); padding: 5px 0; display: inline-block; }
+        #footer .footer-links li a:hover { color: var(--gold-primary); }
+        .footer-map iframe { width: 100%; height: 200px; border-radius: 5px; border: 1px solid #333; opacity: 0.7; transition: opacity 0.3s ease; }
+        .footer-map iframe:hover { opacity: 1; }
+        .copyright { border-top: 1px solid #2a2a2a; padding: 25px 0; margin-top: 60px; text-align: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div id="preloader"><div class="spinner"></div></div>
+    
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i></a>
+
+    <header class="page-header">
+        <div class="container" data-aos="fade-up">
+            <span class="sub-title">Our Services</span>
+            <h1 class="main-title">Event Architecture</h1>
+            <p style="color:var(--text-secondary); max-width:600px; margin: 10px auto 0;">Bringing your vision to life with precision and creative flair.</p>
+        </div>
+    </header>
+    
+    <section class="services-main" style="padding: var(--section-padding);">
+        <div class="container">
+            <div class="row">
+
+                <!-- Service 1: Event Decoration -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card-photo">
+                        <div class="card-image">
+                            <img src="event.jpg" alt="Elegant Event Decoration">
+                        </div>
+                        <div class="card-content">
+                            <h3>Event Decoration</h3>
+                            <p>Bespoke decoration services to create a memorable atmosphere. From tablescapes to grand entrances, we cover it all.</p>
+                            <a href="whatshapp 2.html" class="site-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2: Confectioner -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card-photo">
+                        <div class="card-image">
+                            <img src="chef.jpg" alt="Luxury Confectionery Creations">
+                        </div>
+                        <div class="card-content">
+                            <h3>Confectioner Services</h3>
+                            <p>Commission breathtaking custom cakes and delectable creations that are as beautiful as they are delicious.</p>
+                            <a href="whatshapp 2.html" class="site-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3: Stage Decoration -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card-photo">
+                        <div class="card-image">
+                            <img src="stage.jpg" alt="Magnificent Stage Decoration">
+                        </div>
+                        <div class="card-content">
+                            <h3>Stage Decoration</h3>
+                            <p>We create the perfect focal point for your event with stunning stage designs, lighting, and floral arrangements.</p>
+                            <a href="whatshapp 2.html" class="site-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Consistent Footer from Main Site -->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>About Malik Brothers</h4>
+                    <p>Your premiere partners in event planning, gourmet catering, and professional service. We are dedicated to making every occasion a masterpiece.</p>
+                </div>
+                <div class="col-md-4">
+                     <h4>Contact Info</h4>
+                     <ul class="list-unstyled">
+                        <li style="margin-bottom:10px;"><i class="fas fa-map-marker-alt" style="margin-right:10px;color:var(--gold-primary);"></i> Kacheri Road, Ajmer</li>
+                        <li style="margin-bottom:10px;"><i class="fas fa-phone-alt" style="margin-right:10px;color:var(--gold-primary);"></i> +91 7665941599</li>
+                        <li style="margin-bottom:10px;"><i class="fas fa-envelope" style="margin-right:10px;color:var(--gold-primary);"></i> <a href="mailto:gaurav@gmail.com">gaurav@gmail.com</a></li>
+                     </ul>
+                </div>
+                 <div class="col-md-4">
+                    <h4>Our Location</h4>
+                    <div class="footer-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1697.5668110865813!2d74.63425084714099!3d26.460028479352484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396be71ce4e63eff%3A0xd34d8d8af9b6ec68!2sAjmer%20Tower!5e1!3m2!1sen!2sin!4v1753534412327!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe></div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright"> Copyright © 2025 Malik Brothers. All Rights Reserved. Powered by <a href="#">Tejaswi Sen</a>. </div>
+    </footer>
+
+    <!-- All necessary JS files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Preloader logic
+            $(window).on('load', function() {
+                $('#preloader').fadeOut('slow', function() { $(this).remove(); });
+            });
+            // AOS (Animate on Scroll) initialization
+            AOS.init({ duration: 800, once: true, offset: 50 });
+        });
+    </script>
+</body>
+</html>
